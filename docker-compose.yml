@@ -1,0 +1,150 @@
+services:
+  reverse-proxy:
+    image: traefik:v3.2
+    command:
+      - --api.insecure=true
+      - --providers.docker
+      - --accesslog=true
+      - --accesslog.filepath=/var/log/traefik/access.log
+      - --log.level=DEBUG
+      - --entrypoints.web.address=:80
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - traefik_logs:/var/log/traefik
+    networks:
+      - app-network
+      
+  person-db:
+    image: postgres:13
+    container_name: ds-person-db
+    environment:
+      POSTGRES_DB: user-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - person-db-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    ports:
+      - "5432:5432"
+
+  device-db:
+    image: postgres:13
+    container_name: ds-device-db
+    environment:
+      POSTGRES_DB: device-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - device-db-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    ports:
+      - "5433:5432"
+
+  person-service:
+    build:
+      context: ./User_Service
+      dockerfile: Docker
+    container_name: ds-person-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://person-db:5432/user-db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      - person-db
+    networks:
+      - app-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.person-service.rule=Host(`person-service.localhost`)"
+      - "traefik.http.routers.person-service.middlewares=person-strip-prefix"
+      - "traefik.http.middlewares.person-strip-prefix.stripprefix.prefixes=/person-service"
+      - "traefik.http.services.person-service.loadbalancer.server.port=9090"
+      - "traefik.port=9090"
+
+  device-service:
+    build:
+      context: ./Device_Service
+      dockerfile: Docker
+    container_name: ds-device-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://device-db:5432/device-db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      - device-db
+    networks:
+      - app-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.device-service.rule=Host(`device-service.localhost`)"
+      - "traefik.http.routers.device-service.middlewares=device-strip-prefix"
+      - "traefik.http.middlewares.device-strip-prefix.stripprefix.prefixes=/device-service"
+      - "traefik.http.services.device-service.loadbalancer.server.port=9091"
+      - "traefik.port=9091"
+
+  chat-service:
+    build:
+      context: ./chatMicroservice
+      dockerfile: Docker
+    container_name: ds-chat-service
+    ports:
+      - "8086:8086"
+    networks:
+      - app-network
+
+  monitoring_db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=monitoring-db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5435:5432"
+    volumes:
+      - monitoring-db:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  monitoring:
+    build:
+      context: "./MonitorService"
+      dockerfile: Docker
+    depends_on:
+      - monitoring_db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://monitoring_db:5432/monitoring-db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    networks:
+      - app-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.monitoring.rule=Host(`monitoring.localhost`)"
+      - "traefik.http.routers.monitoring.middlewares=monitoring-strip-prefix"
+      - "traefik.http.middlewares.monitoring-strip-prefix.stripprefix.prefixes=/monitoring"
+      - "traefik.http.services.monitoring.loadbalancer.server.port=8081"
+      - "traefik.port=8081"
+
+  frontend:
+    build:
+      context: ./microservice-app
+      dockerfile: Docker
+    container_name: ds-frontend
+    networks:
+      - app-network
+    ports:
+      - "3000:80"
+
+volumes:
+  person-db-data:
+  device-db-data:
+  traefik_logs:
+  monitoring-db:
+
+networks:
+  app-network:
