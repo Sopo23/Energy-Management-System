@@ -47,7 +47,7 @@ services:
 
   person-service:
     build:
-      context: ./User_Service
+      context: UserService
       dockerfile: Docker
     container_name: ds-person-service
     environment:
@@ -68,7 +68,7 @@ services:
 
   device-service:
     build:
-      context: deviceService
+      context: DeviceService
       dockerfile: Docker
     container_name: ds-device-service
     environment:
@@ -89,7 +89,7 @@ services:
 
   chat-service:
     build:
-      context: ./chatMicroservice
+      context: ChatMicroservice
       dockerfile: Docker
     container_name: ds-chat-service
     ports:

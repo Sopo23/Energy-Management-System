@@ -1,0 +1,12 @@
+
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(íÍú
+I
+java:S1068".Remove this unused "chatRoomId" private field.(ö÷Šàùÿÿÿÿ
+C
+java:S1068"(Remove this unused "type" private field.(–î†ûÿÿÿÿ
+E
+java:S1068"*Remove this unused "sender" private field.(îú”Úşÿÿÿÿ
+F
+java:S1068"+Remove this unused "content" private field.(ÃÇÿôøÿÿÿÿ
+>
+java:S1068"(Remove this unused "seen" private field.(˜ûÎ

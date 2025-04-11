@@ -1,0 +1,12 @@
+
+ì
+java:S1598"ĞThis file "DeviceDto.java" should be located in "com\example\user_service\dto" directory, not in "C:\Users\Darius\IdeaProjects\Energy-Management-System\User_Service\src\main\java\com\example\userService\dto".(¶ÓËÆûÿÿÿÿ
+A
+java:S1068"&Remove this unused "id" private field.(şÓî«şÿÿÿÿ
+J
+java:S1068"/Remove this unused "description" private field.(ÇÓæâıÿÿÿÿ
+F
+java:S1068	"+Remove this unused "address" private field.(÷§ùÿÿÿÿ
+P
+java:S1068
+"5Remove this unused "energyConsumption" private field.(àà¿éøÿÿÿÿ

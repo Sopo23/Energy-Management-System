@@ -1,0 +1,12 @@
+
+ñ
+java:S1598"ÕThis file "DeviceDto.java" should be located in "com\example\device_service\dto" directory, not in "C:\Users\Darius\IdeaProjects\Energy-Management-System\deviceService\src\main\java\com\example\deviceService\dto".(ÒÚ´æúÿÿÿÿ
+p	java:S116"[Rename this field "UserReferenceDto" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÄùùÊ
+A
+java:S1068"&Remove this unused "id" private field.(şÓî«şÿÿÿÿ
+J
+java:S1068"/Remove this unused "description" private field.(ÇÓæâıÿÿÿÿ
+F
+java:S1068"+Remove this unused "address" private field.(÷§ùÿÿÿÿ
+P
+java:S1068"5Remove this unused "energyConsumption" private field.(àà¿éøÿÿÿÿ

@@ -1,0 +1,11 @@
+
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ù˜ë»ıÿÿÿÿ8¨œ‚¢â2
+m	java:S117C"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤æ²è8¨œ‚¢â2
+r	java:S117Z"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(´„•øüÿÿÿÿ8¨œ‚¢â2
+r	java:S117]"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÊÏüßüÿÿÿÿ8¨œ‚¢â2
+r	java:S117e"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(´„•øüÿÿÿÿ8¨œ‚¢â2
+†
+java:S1598"ïThis file "DeviceServiceImpl.java" should be located in "com\example\device_service\service\impl" directory, not in "C:\Users\Darius\IdeaProjects\Energy-Management-System\deviceService\src\main\java\com\example\deviceService\service\impl".( Øß
+~	java:S116"bRename this field "UserReferenceRepository" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Îê¹Ğ8µœ‚¢â2
+N	java:S106"9Replace this use of System.out or System.err by a logger.(¤ÊŠŒ
+S	java:S106#"9Replace this use of System.out or System.err by a logger.(Óøáßùÿÿÿÿ
