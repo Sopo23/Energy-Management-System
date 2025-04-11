@@ -9,15 +9,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class NotificationWebSocketHandler extends TextWebSocketHandler {
 
-    // Store active sessions mapped to usernames
     private final ConcurrentHashMap<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
-        // Extract username directly from query parameter
         try {
             String query = session.getUri().getQuery();
-            String username = query.split("=")[1]; // e.g., ws://localhost:8080/notifications?user=username
+            String username = query.split("=")[1];
 
             sessions.put(username, session);
             System.out.println("WebSocket connection established for user: " + username);
@@ -31,7 +29,6 @@ public class NotificationWebSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
-        // Handle incoming messages if needed
         System.out.println("Received message: " + message.getPayload());
     }
 

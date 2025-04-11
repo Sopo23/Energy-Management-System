@@ -16,20 +16,18 @@ public class ChatController {
     @MessageMapping("/sendMessage")
     @SendTo("/topic/messages")
     public ChatMessage sendMessage(ChatMessage message, @PathVariable String userId) {
-        // Attach the sender information and chat room ID dynamically
-        message.setSender(new Sender(userId, "Unknown")); // Replace "Unknown" with an actual username lookup
-        message.setChatRoomId("chat-room-" + userId); // Create chat room ID dynamically
-        message.setSeen(false); // Mark as unseen initially
+        message.setSender(new Sender(userId, "Unknown"));
+        message.setChatRoomId("chat-room-" + userId);
+        message.setSeen(false);
         return message;
     }
 
     @MessageMapping("/typing")
     @SendTo("/topic/typing")
     public ChatMessage notifyTyping(ChatMessage message, @PathVariable String userId) {
-        // Create a typing notification message
         message.setType("typing");
-        message.setSender(new Sender(userId, "Unknown")); // Replace "Unknown" with an actual username lookup
-        message.setChatRoomId("chat-room-" + userId); // Add chat room ID dynamically
+        message.setSender(new Sender(userId, "Unknown"));
+        message.setChatRoomId("chat-room-" + userId);
         return message;
     }
 }

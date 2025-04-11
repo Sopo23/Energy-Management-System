@@ -15,18 +15,18 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue deviceChangesQueue() {
-        return new Queue(DEVICE_CHANGES_QUEUE, true); // Durable queue
+        return new Queue(DEVICE_CHANGES_QUEUE, true);
     }
 
     @Bean
     public MessageConverter jsonMessageConverter() {
-        return new Jackson2JsonMessageConverter(); // Converts messages to/from JSON
+        return new Jackson2JsonMessageConverter();
     }
 
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         RabbitTemplate template = new RabbitTemplate(connectionFactory);
-        template.setMessageConverter(jsonMessageConverter()); // Use JSON converter
+        template.setMessageConverter(jsonMessageConverter());
         return template;
     }
 }

@@ -21,7 +21,6 @@ public class EnergyDataListener {
             String deviceId = (String) message.get("device_id");
             double measurementValue = Double.parseDouble(message.get("measurement_value").toString());
 
-            // Process the energy data
             energyService.processEnergyData(deviceId, measurementValue);
             System.out.println("Processed energy data: " + deviceId + " = " + measurementValue);
         } catch (Exception e) {

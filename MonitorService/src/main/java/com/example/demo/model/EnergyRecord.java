@@ -17,10 +17,8 @@ public class EnergyRecord {
     @Column(name = "timestamps")
     private LocalDateTime timestamp;
 
-    // Default constructor
     public EnergyRecord() {}
 
-    // Getters and setters
     public Long getId() {
         return id;
     }

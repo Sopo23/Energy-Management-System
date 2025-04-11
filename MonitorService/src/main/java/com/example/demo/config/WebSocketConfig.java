@@ -13,7 +13,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(notificationWebSocketHandler(), "/notifications")
-                .setAllowedOrigins("*"); // Allow all origins for testing (restrict in production)
+                .setAllowedOrigins("*");
     }
 
     @Bean

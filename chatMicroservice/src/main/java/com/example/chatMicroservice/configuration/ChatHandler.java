@@ -84,7 +84,7 @@ public class ChatHandler extends TextWebSocketHandler {
 
     private String extractChatRoomId(String path) {
         if (path.startsWith("/chat/")) {
-            return path.substring("/chat/".length()); // Extract everything after "/chat/"
+            return path.substring("/chat/".length()); 
         } else if (path.startsWith("/group-chat/group1")) {
             return path.substring("/group-chat/".length());
         }

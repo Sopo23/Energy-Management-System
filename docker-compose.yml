@@ -68,7 +68,7 @@ services:
 
   device-service:
     build:
-      context: ./Device_Service
+      context: deviceService
       dockerfile: Docker
     container_name: ds-device-service
     environment:
